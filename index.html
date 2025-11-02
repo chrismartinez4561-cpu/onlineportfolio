@@ -97,19 +97,19 @@
 
         .menu-link-wrapper a.menu-button {
             /* The 'Little Square' Button Style */
-            display: flex; 
+            display: flex; /* Use flex to align text and tooltip */
             justify-content: space-between;
             align-items: center;
-            width: 90%; 
+            width: 90%; /* Controls button width inside wrapper */
             padding: 10px 15px;
             background-color: var(--color-button-bg);
-            border: 1px solid var(--color-button-bg); 
+            border: 1px solid var(--color-button-bg); /* Use same color border for subtle initial square */
             color: var(--color-text);
             text-decoration: none;
-            font-size: 1.2rem; 
-            font-weight: 500; 
+            font-size: 1.2rem; /* Tighter font size */
+            font-weight: 500; /* Not bolded */
             letter-spacing: 0.5px;
-            border-radius: 4px; 
+            border-radius: 4px; /* Slight rounding for modernity */
             transition: background-color 0.2s, border-color 0.2s, color 0.2s;
             
             /* FIX FOR WRAPPING */
@@ -119,12 +119,12 @@
 
         .menu-link-wrapper a.menu-button:hover {
             /* Interactive Effect: Gets lighter and shows accent border */
-            background-color: var(--color-dark-bg); 
-            border-color: var(--color-accent); 
+            background-color: var(--color-dark-bg); /* Darker background on hover */
+            border-color: var(--color-accent); /* Accent border pops out */
             color: var(--color-accent);
         }
 
-        /* TOOLTIP STYLING FOR IP WARNING - FIX APPLIED HERE */
+        /* TOOLTIP STYLING FOR IP WARNING */
         .tooltip {
             position: relative;
             display: inline-block;
@@ -141,11 +141,11 @@
             text-align: center;
             border-radius: 4px;
             padding: 8px;
-            position: fixed; 
-            z-index: 1002; /* Highest z-index to ensure visibility over the menu */
-            top: 20px; 
+            position: absolute;
+            z-index: 1001;
+            bottom: 100%; /* Position the tooltip above the exclamation point */
             left: 50%;
-            transform: translateX(-50%); 
+            margin-left: -125px; /* Center the tooltip */
             opacity: 0;
             transition: opacity 0.3s;
             border: 1px solid var(--color-accent);
@@ -172,17 +172,29 @@
             color: var(--color-accent);
         }
 
-        /* 3. HERO CONTENT - RESTORATION */
+        /* 3. HERO CONTENT & BACKGROUND ANIMATION */
         .hero {
+            height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 80px 5% 40px 5%; /* Restored original padding */
-            background-color: var(--color-background); 
+            padding: 0 5%;
+            position: relative;
+            overflow: hidden;
+            transition: filter 0.4s; 
+            
+            /* **FINAL ROBOTIC ARM BACKGROUND IMAGE** */
+            background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url('robot_arm.jpg'); /* Subtle dark overlay + image */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed; /* Fixed background for dramatic effect */
         }
-
+        .menu-overlay.active + .hero {
+            filter: brightness(50%); 
+        }
         .hero-title {
             font-size: 3rem; 
             font-weight: 900;
@@ -204,7 +216,7 @@
             font-weight: 500;
         }
 
-        /* 4. QUICK FACTS / CALL-TO-ACTION BLOCKS (RESTORED) */
+        /* 4. QUICK FACTS / CALL-TO-ACTION BLOCKS */
         .quick-facts {
             display: flex;
             justify-content: center;
@@ -212,20 +224,16 @@
             max-width: 1100px;
             margin-top: 30px;
         }
-        /* Applied to anchor tag 'a' now, since fact-block is now a link */
-        a.fact-block {
-            background-color: rgba(30, 30, 30, 0.85);
+        .fact-block {
+            background-color: rgba(30, 30, 30, 0.85); /* Semi-transparent dark background */
             padding: 25px;
             border-radius: 8px;
             flex: 1;
             border-top: 3px solid var(--color-accent);
             cursor: pointer;
             transition: transform 0.3s, background-color 0.3s;
-            border: 1px solid var(--color-accent); /* Added subtle border to match image */
-            text-decoration: none; /* Important: remove link underline */
-            color: inherit; /* Inherit text color */
         }
-        a.fact-block:hover {
+        .fact-block:hover {
             transform: translateY(-5px);
             background-color: #2e2e2e;
         }
@@ -240,16 +248,18 @@
             margin: 0;
         }
 
-        /* Responsive Adjustments (RESTORED) */
+        /* Responsive Adjustments */
         @media (max-width: 768px) {
             .hero-title { font-size: 2rem; letter-spacing: 3px; }
             .hero-subtitle { font-size: 1.1rem; }
             .quick-facts { flex-direction: column; }
             .fact-block { margin-bottom: 15px; }
             .menu-link-wrapper a.menu-button { font-size: 1.5rem; padding: 12px 18px; }
+            .hero {
+                background-attachment: scroll; /* Prevent fixed background on mobile for better performance */
+            }
         }
-        
-        /* ** NEW LANGUAGE BUTTON STYLES (CORRECTED) ** */
+       /* ** NEW LANGUAGE BUTTON STYLES (CORRECTED) ** */
         .lang-button {
             display: inline-block; 
             padding: 5px 10px;
@@ -281,7 +291,7 @@
             border-top: 1px solid rgba(255, 255, 255, 0.05);
         }
     </style>
-    <!-- ** GOOGLE TRANSLATE SCRIPT (MUST BE IN HEAD FOR TIMING) ** -->
+     <!-- ** GOOGLE TRANSLATE SCRIPT (MUST BE IN HEAD FOR TIMING) ** -->
     <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
 </head>
@@ -290,6 +300,7 @@
     <!-- 1. MENU TOGGLE BUTTON (TOP-LEFT POSITION) -->
     <div class="menu-toggle" id="menuToggle">
         <span class="initial-blink">MENU</span> 
+        <!-- CORRECTED SVG FOR HORIZONTAL LINES -->
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu initial-blink">
             <line x1="3" y1="12" x2="21" y2="12"></line>
             <line x1="3" y1="6" x2="21" y2="6"></line>
@@ -325,12 +336,7 @@
         <div class="menu-link-wrapper">
             <a href="certificates.html" class="menu-button" onclick="toggleMenu()">Certifications</a>
         </div>
-        <!-- NEW CONTACT LINK ADDED HERE -->
-        <div class="menu-link-wrapper">
-            <a href="contact.html" class="menu-button" onclick="toggleMenu()">Contact</a>
-        </div>
-
-        <!-- ** TRANSLATION BUTTONS INSERTED HERE (Correct Placement) ** -->
+      <!-- ** TRANSLATION BUTTONS INSERTED HERE (Correct Placement) ** -->
         <div class="lang-container">
             <!-- The Google widget will load hidden here -->
             <div id="google_translate_element" style="display: none;"></div> 
@@ -341,8 +347,6 @@
             <a href="javascript:void(0)" class="lang-button" onclick="translatePage('fr')">FR</a>
         </div>
         <!-- END OF TRANSLATION BUTTONS -->
-        
-        <!-- COPYRIGHT NOTICE (LAST ITEM IN OVERLAY) -->
         <div style="position: absolute; bottom: 20px; left: 40px; font-size: 0.9rem; color: #666;">
             &copy; 2025 Christian J. Martinez Rosa
         </div>
@@ -351,28 +355,31 @@
     <!-- 3. HERO CONTENT (The Breathtaking Opener) -->
     <div class="hero">
         <h1 class="hero-title">SUPPLY CHAIN & AUTOMATION SOLUTIONS</h1>
+        <!-- CORRECTED ROLE NAME HERE -->
         <p class="hero-subtitle">Christian J. Martinez Rosa | Supply Chain Solutions Analyst</p>
+
+        <!-- NEW PURPOSE STATEMENT HERE -->
         <p class="purpose-statement">
             Portfolio dedicated to <strong>Supply Chain and Automation Solutions</strong> focused on driving efficiency and optimizing logistics within large-scale retail and third party warehouse environments. Analysis and frameworks demonstrate clear capability in utilizing technology to solve <strong>complex real world problems</strong>. Expertise grounded in a <strong>Bachelor of Science and Supply Chain and Operations Management</strong>, with candidacy established for an <strong>MBA-ITM</strong> focused on automation. Projects include automated key logistics processes: depalletization, Bill of Lading (BOL) processing, real-time communication systems, etc.
         </p>
 
         <!-- 4. QUICK FACTS / CALL-TO-ACTION BLOCKS -->
         <div class="quick-facts">
-            <!-- Block 1: Managerial Impact - Changed to anchor tag for safe redirection -->
-            <a href="professional.html" class="fact-block">
+            <!-- Block 1: Managerial Impact -->
+            <div class="fact-block" onclick="window.location.href='professional.html'">
                 <h3>60%+ Error Reduction</h3>
                 <p>Order Fulfillment Operations Accuracy</p>
-            </a>
-            <!-- Block 2: Financial Impact - Changed to anchor tag for safe redirection -->
-            <a href="professional.html" class="fact-block">
+            </div>
+            <!-- Block 2: Financial Impact -->
+            <div class="fact-block" onclick="window.location.href='professional.html'">
                 <h3>25-35% Loss Prevention</h3>
                 <p>Dated Product Inventory Financial Impact</p>
-            </a>
-            <!-- Block 3: Technical Focus - Changed to anchor tag for safe redirection -->
-            <a href="automation.html" class="fact-block">
+            </div>
+            <!-- Block 3: Technical Focus -->
+            <div class="fact-block" onclick="window.location.href='automation.html'">
                 <h3>Three Automation IP Solutions</h3>
                 <p>Robotics & System Design Case Studies</p>
-            </a>
+            </div>
         </div>
     </div>
 
@@ -408,8 +415,7 @@
             }, 2000); // 2000 milliseconds = 2 seconds
         });
     </script>
-    
-    <!-- ** TRANSLATION SCRIPTS (The FINAL, Working Fix) ** -->
+     <!-- ** TRANSLATION SCRIPTS (Placed at bottom for performance) ** -->
     <script type="text/javascript">
         // Initializes the Google Translate service once
         function googleTranslateElementInit() {
@@ -419,29 +425,20 @@
                 layout: google.translate.TranslateElement.InlineLayout.SIMPLE
             }, 'google_translate_element');
         }
-        
-        // Function to change the language when a button is clicked (The FINAL FIX)
+
+        // Function to change the language when a button is clicked (with FIX)
         function translatePage(lang) {
-            // Check if the global Google Translate object is available
-            if (window.google && google.translate) {
-                 var select = document.querySelector('.goog-te-combo');
+            // FIX: Introduce a small delay to ensure the Google component is loaded
+            setTimeout(function() {
+                var select = document.querySelector('.goog-te-combo');
                 if (select) {
                     select.value = lang;
+                    // This triggers the translation change
                     select.dispatchEvent(new Event('change'));
-                }
-            } else {
-                // Fallback attempt (original timing fix)
-                setTimeout(function() {
-                    var select = document.querySelector('.goog-te-combo');
-                    if (select) {
-                        select.value = lang;
-                        select.dispatchEvent(new Event('change'));
-                    } 
-                }, 500); 
-            }
+                } 
+            }, 500); // 500 milliseconds (half a second) delay
         }
     </script>
     <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-
 </body>
 </html>
