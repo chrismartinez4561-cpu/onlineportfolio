@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Christian J. Martinez Rosa | Professional Experience</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;900&display=swap" rel="stylesheet">
+    <style>
+        /* CORE DARK MODE VARIABLES & STYLING (Cohesive with Index) */
+        :root {
+            --color-background: #121212;
+            --color-text: #FFFFFF;
+            --color-accent: #00FFC0; /* Neon Blue/Green */
+            --color-dark-bg: #1E1E1E;
+            --color-button-bg: #282828;
+            --color-separator: #3a3a3a;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--color-text);
+            background-color: var(--color-background);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            padding-top: 80px; 
+            background-image: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9)), url('background.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .page-header {
+            text-align: center;
+            margin-bottom: 50px; 
+            position: relative; 
+            padding: 20px 0; 
+            overflow: hidden; 
+        }
+        .page-header h1 {
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--color-text);
+            text-transform: uppercase;
+            position: relative; 
+            z-index: 2; 
+            margin-bottom: 0; 
+        }
+        .page-header p {
+            color: var(--color-accent);
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin-top: 5px;
+            position: relative; 
+            z-index: 2; 
+        }
+
+        /* NEW: RADIAL GLOWING EFFECT BEHIND HEADER TEXT */
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 300px; 
+            height: 100px; 
+            background: radial-gradient(ellipse at center, rgba(0, 255, 192, 0.15) 0%, rgba(0, 255, 192, 0) 70%); 
+            transform: translate(-50%, -50%);
+            z-index: 1; 
+            pointer-events: none; 
+        }
+        
+
+        /* PROJECT SECTION STYLING */
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); /* Adjusted min-width for larger cards */
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        .project-card {
+            background-color: var(--color-dark-bg);
+            padding: 30px;
+            border-radius: 8px;
+            border-top: 4px solid var(--color-accent);
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+        }
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 255, 192, 0.15);
+        }
+        .project-card h2 {
+            color: var(--color-accent);
+            font-size: 1.5rem;
+            margin-top: 0;
+            margin-bottom: 15px;
+            border-bottom: 1px solid var(--color-separator);
+            padding-bottom: 10px;
+        }
+        .project-card p {
+            color: #AAAAAA;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+        .view-study-link {
+            color: var(--color-accent); 
+            font-weight: bold; 
+            display: block; 
+            margin-top: 20px;
+            font-size: 0.9rem;
+        }
+
+
+        /* MENU TOGGLE STYLES (Cohesive with index.html) */
+        .menu-toggle { position: fixed; top: 20px; left: 20px; z-index: 1000; cursor: pointer; color: var(--color-text); font-size: 1.2rem; font-weight: 700; display: flex; align-items: center; transition: color 0.3s; }
+        .menu-toggle:hover { color: var(--color-accent); }
+        .menu-toggle span { margin-right: 8px; }
+        .menu-overlay { position: fixed; top: 0; left: 0; width: 25%; max-width: 400px; height: 100%; background-color: var(--color-dark-bg); box-shadow: 4px 0 15px rgba(0, 0, 0, 0.5); z-index: 999; transform: translateX(-100%); transition: transform 0.4s ease-in-out; padding-top: 80px; visibility: hidden; display: flex; flex-direction: column; align-items: flex-start; padding-left: 40px; }
+        .menu-overlay.active { transform: translateX(0); visibility: visible; }
+        .menu-close { position: absolute; top: 20px; right: 20px; font-size: 2rem; cursor: pointer; color: var(--color-text); }
+        .menu-close:hover { color: var(--color-accent); }
+        .menu-link-wrapper { width: 90%; margin-bottom: 10px; }
+        
+        /* FIX FOR WRAPPING (APPLIED) */
+        .menu-link-wrapper a.menu-button { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            width: 90%; 
+            padding: 10px 15px; 
+            background-color: var(--color-button-bg); 
+            border: 1px solid var(--color-button-bg); 
+            color: var(--color-text); 
+            text-decoration: none; 
+            font-size: 1.2rem; 
+            font-weight: 500; 
+            letter-spacing: 0.5px; 
+            border-radius: 4px; 
+            transition: background-color 0.2s, border-color 0.2s, color 0.2s; 
+            white-space: nowrap; 
+            overflow: hidden; 
+        }
+        
+        .menu-link-wrapper a.menu-button:hover { background-color: var(--color-dark-bg); border-color: var(--color-accent); color: var(--color-accent); }
+        .tooltip .tooltiptext { visibility: hidden; } 
+        @media (max-width: 768px) { .menu-overlay { width: 75%; } }
+    </style>
+</head>
+<body>
+
+    <div class="menu-toggle" id="menuToggle">
+        <span>MENU</span> 
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+    </div>
+
+    <div class="menu-overlay" id="menuOverlay">
+        <div class="menu-close" onclick="toggleMenu()">&times;</div>
+        
+        <div class="menu-link-wrapper"><a href="index.html" class="menu-button" onclick="toggleMenu()">Home</a></div>
+        <div class="menu-link-wrapper"><a href="professional.html" class="menu-button" onclick="toggleMenu()">Experience</a></div>
+        <div class="menu-link-wrapper"><a href="automation.html" class="menu-button" onclick="toggleMenu()">Automation Projects <span class="tooltip">❗<span class="tooltiptext">Secured to protect Intellectual Property.</span></span></a></div>
+        <div class="menu-link-wrapper"><a href="academic-foundations.html" class="menu-button" onclick="toggleMenu()">Academic Foundations</a></div>
+        <div class="menu-link-wrapper"><a href="certificates.html" class="menu-button" onclick="toggleMenu()">Certifications</a></div>
+        <div class="menu-link-wrapper"><a href="contact.html" class="menu-button" onclick="toggleMenu()">Contact</a></div> 
+    </div>
+    
+    <div class="container">
+        <header class="page-header">
+            <h1>Professional Experience & Impact</h1>
+            <p>From Distribution Management to Strategic Solutions Analysis</p>
+        </header>
+
+        <div class="project-grid">
+            
+            <!-- PROJECT 1: Distribution Manager - Retail Audit -->
+            <div class="project-card" onclick="window.location.href='#'"> 
+                <h2>Retail Audit & Inventory Integrity System</h2>
+                <div class="card-summary" style="color: #aaa; font-size: 0.95em;">
+                    <p><b>WHY:</b> Manual, inconsistent inventory and retail auditing across 35+ locations led to stock discrepancies and failures in brand compliance.</p>
+                    <p><b>HOW:</b> Designed and implemented a <b>data-driven audit process</b>, utilizing scheduled data checks and field reconciliation to ensure stock levels and documentation matched physical assets. </p>
+                    <p><b>OUTPUT:</b> Achieved a <b>consistent 98% quality assurance and stock accuracy rate</b> while improving team efficiency through standardized, data-backed procedures.</p>
+                </div>
+                <span class="view-study-link">Process Overview</span>
+            </div>
+
+            <!-- PROJECT 2: Distribution Manager - Order Fulfillment -->
+            <div class="project-card" onclick="window.location.href='#'"> 
+                <h2>Order Fulfillment Workflow Streamlining</h2>
+                <div class="card-summary" style="color: #aaa; font-size: 0.95em;">
+                    <p><b>WHY:</b> Suboptimal and decentralized operational workflows created process gaps, resulting in unnecessary waste and limited scalability for order fulfillment.</p>
+                    <p><b>HOW:</b> <b>Streamlined and consolidated fulfillment workflows</b> and developed comprehensive staff training programs focused on standardized data maintenance and optimal operational steps.</p>
+                    <p><b>OUTPUT:</b> The new processes supported an <b>organizational sales growth of 95%</b> by creating efficient, high-accuracy fulfillment pipelines, simultaneously minimizing waste and inventory errors.</p>
+                </div>
+                <span class="view-study-link">Process Overview</span>
+            </div>
+
+            <!-- PROJECT 3: Fulfillment Manager - Efficiency Improvement -->
+             <div class="project-card" onclick="window.location.href='#'"> 
+                <h2>Departmental Efficiency & Logistics Optimization</h2>
+                <div class="card-summary" style="color: #aaa; font-size: 0.95em;">
+                    <p><b>WHY:</b> Manual logistics processes and disjointed order fulfillment steps created throughput bottlenecks and resource waste.</p>
+                    <p><b>HOW:</b> Identified and implemented operational enhancements across logistics and order fulfillment, including a reorganized receiving bay and a revised truck loading sequence.</p>
+                    <p><b>OUTPUT:</b> Resulted in a measurable <b>45% improvement in overall departmental efficiency</b> and guaranteed consistency across 30+ retail partner locations.</p>
+                </div>
+                <span class="view-study-link">Process Overview</span>
+            </div>
+
+        </div>
+        
+        <hr style="border-top: 1px solid #444; max-width: 1200px; margin: 40px auto;">
+
+        <div style="text-align: center; color: #7F8C8D; padding: 20px;">
+            <p><strong>Note:</strong> These projects reflect operational and managerial accomplishments achieved during my tenure in distribution leadership.</p>
+        </div>
+        
+    </div>
+
+    <!-- JAVASCRIPT FOR MENU FUNCTIONALITY -->
+    <script>
+        function toggleMenu() {
+            const overlay = document.getElementById('menuOverlay');
+            overlay.classList.toggle('active');
+            document.body.style.overflow = overlay.classList.contains('active') ? 'hidden' : 'auto';
+        }
+        document.getElementById('menuToggle').addEventListener('click', toggleMenu);
+        document.addEventListener('DOMContentLoaded', () => {
+             const menuToggle = document.getElementById('menuToggle');
+             if (menuToggle) {
+                 menuToggle.style.color = 'var(--color-accent)';
+             }
+        });
+    </script>
+</body>
+</html>

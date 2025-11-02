@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Christian J. Martinez Rosa | Supply Chain Solutions Analyst Portfolio</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;900&display=swap" rel="stylesheet">
+    <style>
+        /* CORE DARK MODE VARIABLES & STYLING */
+        :root {
+            --color-background: #121212;
+            --color-text: #FFFFFF;
+            --color-accent: #00FFC0; /* Neon Blue/Green */
+            --color-dark-bg: #1E1E1E;
+            --color-button-bg: #282828; /* Slightly lighter for button background */
+        }
+
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: 'Montserrat', sans-serif;
+            color: var(--color-text);
+            background-color: var(--color-background); /* Fallback background color */
+            overflow-x: hidden; /* Prevent horizontal scroll */
+            line-height: 1.6;
+        }
+
+        /* 1. MENU BUTTON (TOP-LEFT POSITION) */
+        .menu-toggle {
+            position: fixed;
+            top: 20px;
+            left: 20px; 
+            z-index: 1000;
+            cursor: pointer;
+            color: var(--color-text);
+            font-size: 1.2rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            transition: color 0.3s;
+        }
+        .menu-toggle:hover {
+            color: var(--color-accent);
+        }
+        .menu-toggle span {
+            margin-right: 8px;
+        }
+
+        /* CSS for the timed blinking effect */
+        @keyframes blink-accent {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; color: var(--color-accent); }
+        }
+        .initial-blink {
+            animation: blink-accent 0.5s step-end infinite;
+        }
+
+        /* 2. HIDDEN MENU OVERLAY (SLIDE-OUT PANEL) */
+        .menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 25%; /* SLIDE-OUT WIDTH */
+            max-width: 400px;
+            height: 100%;
+            background-color: var(--color-dark-bg); 
+            box-shadow: 4px 0 15px rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            transform: translateX(-100%); 
+            transition: transform 0.4s ease-in-out;
+            padding-top: 80px;
+            visibility: hidden;
+            display: flex; /* Use flex to align menu items */
+            flex-direction: column;
+            align-items: flex-start; /* Align menu content to the left */
+            padding-left: 40px;
+        }
+        
+        /* Full width on mobile */
+        @media (max-width: 768px) {
+            .menu-overlay {
+                width: 75%;
+            }
+        }
+
+        .menu-overlay.active {
+            transform: translateX(0); 
+            visibility: visible;
+        }
+
+        /* BUTTON-STYLE MENU LINKS */
+        .menu-link-wrapper {
+            width: 90%;
+            margin-bottom: 10px;
+        }
+
+        .menu-link-wrapper a.menu-button {
+            /* The 'Little Square' Button Style */
+            display: flex; /* Use flex to align text and tooltip */
+            justify-content: space-between;
+            align-items: center;
+            width: 90%; /* Controls button width inside wrapper */
+            padding: 10px 15px;
+            background-color: var(--color-button-bg);
+            border: 1px solid var(--color-button-bg); /* Use same color border for subtle initial square */
+            color: var(--color-text);
+            text-decoration: none;
+            font-size: 1.2rem; /* Tighter font size */
+            font-weight: 500; /* Not bolded */
+            letter-spacing: 0.5px;
+            border-radius: 4px; /* Slight rounding for modernity */
+            transition: background-color 0.2s, border-color 0.2s, color 0.2s;
+            
+            /* FIX FOR WRAPPING */
+            white-space: nowrap; 
+            overflow: hidden; 
+        }
+
+        .menu-link-wrapper a.menu-button:hover {
+            /* Interactive Effect: Gets lighter and shows accent border */
+            background-color: var(--color-dark-bg); /* Darker background on hover */
+            border-color: var(--color-accent); /* Accent border pops out */
+            color: var(--color-accent);
+        }
+
+        /* TOOLTIP STYLING FOR IP WARNING */
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            margin-left: 10px;
+            cursor: default;
+            color: var(--color-accent);
+        }
+
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 250px;
+            background-color: var(--color-dark-bg);
+            color: var(--color-accent);
+            text-align: center;
+            border-radius: 4px;
+            padding: 8px;
+            position: absolute;
+            z-index: 1001;
+            bottom: 100%; /* Position the tooltip above the exclamation point */
+            left: 50%;
+            margin-left: -125px; /* Center the tooltip */
+            opacity: 0;
+            transition: opacity 0.3s;
+            border: 1px solid var(--color-accent);
+            font-size: 0.8rem;
+            font-weight: 400;
+            letter-spacing: normal;
+        }
+        
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        /* Menu Close Button - fixed within the slide-out panel */
+        .menu-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 2rem;
+            cursor: pointer;
+            color: var(--color-text);
+        }
+        .menu-close:hover {
+            color: var(--color-accent);
+        }
+
+        /* 3. HERO CONTENT & BACKGROUND ANIMATION */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 5%;
+            position: relative;
+            overflow: hidden;
+            transition: filter 0.4s; 
+            
+            /* **FINAL ROBOTIC ARM BACKGROUND IMAGE** */
+            background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url('background.png'); /* Subtle dark overlay + image */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed; /* Fixed background for dramatic effect */
+        }
+        .menu-overlay.active + .hero {
+            filter: brightness(50%); 
+        }
+        .hero-title {
+            font-size: 3rem; 
+            font-weight: 900;
+            color: var(--color-text);
+            text-transform: uppercase;
+            letter-spacing: 4px; 
+            margin-bottom: 5px;
+        }
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: var(--color-accent);
+            margin-bottom: 30px;
+        }
+        .purpose-statement {
+            max-width: 800px;
+            font-size: 1.0rem; 
+            color: #CCCCCC;
+            margin-bottom: 50px;
+            font-weight: 500;
+        }
+
+        /* 4. QUICK FACTS / CALL-TO-ACTION BLOCKS */
+        .quick-facts {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            max-width: 1100px;
+            margin-top: 30px;
+        }
+        .fact-block {
+            background-color: rgba(30, 30, 30, 0.85); /* Semi-transparent dark background */
+            padding: 25px;
+            border-radius: 8px;
+            flex: 1;
+            border-top: 3px solid var(--color-accent);
+            cursor: pointer;
+            transition: transform 0.3s, background-color 0.3s;
+        }
+        .fact-block:hover {
+            transform: translateY(-5px);
+            background-color: #2e2e2e;
+        }
+        .fact-block h3 {
+            color: var(--color-accent);
+            font-size: 1.6rem; 
+            margin-bottom: 5px;
+        }
+        .fact-block p {
+            font-size: 0.9rem;
+            color: #AAAAAA;
+            margin: 0;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .hero-title { font-size: 2rem; letter-spacing: 3px; }
+            .hero-subtitle { font-size: 1.1rem; }
+            .quick-facts { flex-direction: column; }
+            .fact-block { margin-bottom: 15px; }
+            .menu-link-wrapper a.menu-button { font-size: 1.5rem; padding: 12px 18px; }
+            .hero {
+                background-attachment: scroll; /* Prevent fixed background on mobile for better performance */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 1. MENU TOGGLE BUTTON (TOP-LEFT POSITION) -->
+    <div class="menu-toggle" id="menuToggle">
+        <span class="initial-blink">MENU</span> 
+        <!-- CORRECTED SVG FOR HORIZONTAL LINES -->
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu initial-blink">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+    </div>
+
+    <!-- 2. HIDDEN MENU OVERLAY (SLIDE-OUT PANEL) -->
+    <div class="menu-overlay" id="menuOverlay">
+        <!-- Close button -->
+        <div class="menu-close" onclick="toggleMenu()">
+            &times;
+        </div>
+        
+        <div class="menu-link-wrapper">
+            <a href="index.html" class="menu-button" onclick="toggleMenu()">Home</a>
+        </div>
+        <div class="menu-link-wrapper">
+            <a href="professional.html" class="menu-button" onclick="toggleMenu()">Experience</a>
+        </div>
+        <div class="menu-link-wrapper">
+            <a href="automation.html" class="menu-button" onclick="toggleMenu()">
+                Automation Projects
+                <span class="tooltip">
+                    ❗
+                    <span class="tooltiptext">Secured to protect Intellectual Property. Access code required on the next page.</span>
+                </span>
+            </a>
+        </div>
+        <div class="menu-link-wrapper">
+            <a href="academic-foundations.html" class="menu-button" onclick="toggleMenu()">Academic Foundations</a>
+        </div>
+        <div class="menu-link-wrapper">
+            <a href="certificates.html" class="menu-button" onclick="toggleMenu()">Certifications</a>
+        </div>
+        <!-- NEW CONTACT LINK ADDED HERE -->
+        <div class="menu-link-wrapper">
+            <a href="contact.html" class="menu-button" onclick="toggleMenu()">Contact</a>
+        </div>
+        
+        <div style="position: absolute; bottom: 20px; left: 40px; font-size: 0.9rem; color: #666;">
+            &copy; 2025 Christian J. Martinez Rosa
+        </div>
+    </div>
+
+    <!-- 3. HERO CONTENT (The Breathtaking Opener) -->
+    <div class="hero">
+        <h1 class="hero-title">SUPPLY CHAIN & AUTOMATION SOLUTIONS</h1>
+        <!-- CORRECTED ROLE NAME HERE -->
+        <p class="hero-subtitle">Christian J. Martinez Rosa | Supply Chain Solutions Analyst</p>
+
+        <!-- NEW PURPOSE STATEMENT HERE -->
+        <p class="purpose-statement">
+            Portfolio dedicated to <strong>Supply Chain and Automation Solutions</strong> focused on driving efficiency and optimizing logistics within large-scale retail and third party warehouse environments. Analysis and frameworks demonstrate clear capability in utilizing technology to solve <strong>complex real world problems</strong>. Expertise grounded in a <strong>Bachelor of Science and Supply Chain and Operations Management</strong>, with candidacy established for an <strong>MBA-ITM</strong> focused on automation. Projects include automated key logistics processes: depalletization, Bill of Lading (BOL) processing, real-time communication systems, etc.
+        </p>
+
+        <!-- 4. QUICK FACTS / CALL-TO-ACTION BLOCKS -->
+        <div class="quick-facts">
+            <!-- Block 1: Managerial Impact -->
+            <div class="fact-block" onclick="window.location.href='professional.html'">
+                <h3>60%+ Error Reduction</h3>
+                <p>Order Fulfillment Operations Accuracy</p>
+            </div>
+            <!-- Block 2: Financial Impact -->
+            <div class="fact-block" onclick="window.location.href='professional.html'">
+                <h3>25-35% Loss Prevention</h3>
+                <p>Dated Product Inventory Financial Impact</p>
+            </div>
+            <!-- Block 3: Technical Focus -->
+            <div class="fact-block" onclick="window.location.href='automation.html'">
+                <h3>Three Automation IP Solutions</h3>
+                <p>Robotics & System Design Case Studies</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT FOR MENU FUNCTIONALITY -->
+    <script>
+        // Toggles the hidden menu overlay
+        function toggleMenu() {
+            const overlay = document.getElementById('menuOverlay');
+            overlay.classList.toggle('active');
+            
+            // This is crucial: it prevents body scroll when the menu is open
+            document.body.style.overflow = overlay.classList.contains('active') ? 'hidden' : 'auto';
+        }
+
+        // Add event listener to the menu button
+        document.getElementById('menuToggle').addEventListener('click', toggleMenu);
+
+        // --- Timed Blink Effect Logic ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const blinkElements = document.querySelectorAll('.initial-blink');
+            
+            // Start the blink animation
+            blinkElements.forEach(el => {
+                el.style.animationPlayState = 'running';
+            });
+
+            // Stop the blink animation after 2 seconds (less intrusive)
+            setTimeout(() => {
+                blinkElements.forEach(el => {
+                    el.style.animation = 'none'; // Stop the animation
+                    el.style.color = 'var(--color-accent)'; // Ensure the final color is the accent color
+                });
+            }, 2000); // 2000 milliseconds = 2 seconds
+        });
+    </script>
+</body>
+</html>

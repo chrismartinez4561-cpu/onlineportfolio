@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Strategic Automation Projects</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css"> 
+    
+    <style>
+        /* CORE DARK MODE VARIABLES & STYLING */
+        :root {
+            --color-background: #121212;
+            --color-text: #FFFFFF;
+            --color-accent: #00FFC0; /* Neon Blue/Green */
+            --color-dark-bg: #1E1E1E;
+            --color-button-bg: #282828; /* Slightly lighter for button background */
+        }
+
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: 'Montserrat', sans-serif;
+            color: var(--color-text);
+            
+            /* FINAL GUARANTEED BACKGROUND FIX: IMAGE + DARK OVERLAY (REDUCED DARKNESS) */
+            background-image: 
+                /* 1. Dark Overlay (REDUCED TO 65% BLACK) */
+                linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)),
+                /* 2. Base Image (The Robot Arm - CORRECT FILENAME) */
+                url('robot_arm.jpg') !important; 
+            
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            /* REMOVED background-color: #000000; */
+            overflow-x: hidden; /* Prevent horizontal scroll */
+            line-height: 1.6;
+        }
+        
+        /* FIX: Ensure MAIN content area is slightly transparent so the image shows through */
+        main {
+            position: relative;
+            z-index: 10;
+            background-color: rgba(0, 0, 0, 0.5); /* 50% transparent background for main content to reveal the image */
+            min-height: 100vh;
+        }
+        
+        /* 1. MENU BUTTON (TOP-LEFT POSITION) */
+        .menu-toggle {
+            position: fixed;
+            top: 20px;
+            left: 20px; 
+            z-index: 1000;
+            cursor: pointer;
+            color: var(--color-text);
+            font-size: 1.2rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            transition: color 0.3s;
+        }
+        .menu-toggle:hover {
+            color: var(--color-accent);
+        }
+        .menu-toggle span {
+            margin-right: 8px;
+        }
+
+        /* CSS for the timed blinking effect */
+        @keyframes blink-accent {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; color: var(--color-accent); }
+        }
+
+        /* 2. HIDDEN MENU OVERLAY (SLIDE-OUT PANEL) */
+        .menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 25%; /* SLIDE-OUT WIDTH */
+            max-width: 400px;
+            height: 100%;
+            background-color: var(--color-dark-bg); 
+            box-shadow: 4px 0 15px rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            transform: translateX(-100%); 
+            transition: transform 0.4s ease-in-out;
+            padding-top: 80px;
+            visibility: hidden;
+            display: flex; /* Use flex to align menu items */
+            flex-direction: column;
+            align-items: flex-start; /* Align menu content to the left */
+            padding-left: 40px;
+        }
+        
+        /* Full width on mobile */
+        @media (max-width: 768px) {
+            .menu-overlay {
+                width: 75%;
+            }
+        }
+
+        .menu-overlay.active {
+            transform: translateX(0); 
+            visibility: visible;
+        }
+
+        /* BUTTON-STYLE MENU LINKS */
+        .menu-link-wrapper {
+            width: 90%;
+            margin-bottom: 10px;
+        }
+
+        .menu-link-wrapper a.menu-button {
+            /* The 'Little Square' Button Style */
+            display: flex; /* Use flex to align text and tooltip */
+            justify-content: space-between;
+            align-items: center;
+            width: 90%; /* Controls button width inside wrapper */
+            padding: 10px 15px;
+            background-color: var(--color-button-bg);
+            border: 1px solid var(--color-button-bg); /* Use same color border for subtle initial square */
+            color: var(--color-text);
+            text-decoration: none;
+            font-size: 1.2rem; /* Tighter font size */
+            font-weight: 500; /* Not bolded */
+            letter-spacing: 0.5px;
+            border-radius: 4px; /* Slight rounding for modernity */
+            transition: background-color 0.2s, border-color 0.2s, color 0.2s;
+            /* FIX FOR WRAPPING */
+            white-space: nowrap; 
+            overflow: hidden; 
+        }
+
+        .menu-link-wrapper a.menu-button:hover {
+            /* Interactive Effect: Gets lighter and shows accent border */
+            background-color: var(--color-dark-bg); /* Darker background on hover */
+            border-color: var(--color-accent); /* Accent border pops out */
+            color: var(--color-accent);
+        }
+
+        /* TOOLTIP STYLING FOR IP WARNING */
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            margin-left: 10px;
+            cursor: default;
+            color: var(--color-accent);
+        }
+
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 250px;
+            background-color: var(--color-dark-bg);
+            color: var(--color-accent);
+            text-align: center;
+            border-radius: 4px;
+            padding: 8px;
+            position: absolute;
+            z-index: 1001;
+            bottom: 100%; /* Position the tooltip above the exclamation point */
+            left: 50%;
+            margin-left: -125px; /* Center the tooltip */
+            opacity: 0;
+            transition: opacity 0.3s;
+            border: 1px solid var(--color-accent);
+            font-size: 0.8rem;
+            font-weight: 400;
+            letter-spacing: normal;
+        }
+        
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        /* Menu Close Button - fixed within the slide-out panel */
+        .menu-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 2rem;
+            cursor: pointer;
+            color: var(--color-text);
+        }
+        .menu-close:hover {
+            color: var(--color-accent);
+        }
+        
+        /* Styles from original automation.html to ensure project cards look right */
+        .project-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; padding: 40px 20px; max-width: 1200px; margin: 0 auto; }
+        .project-card { background-color: #1a1a1a; padding: 30px; border: 2px solid #444; border-radius: 10px; cursor: pointer; transition: transform 0.2s, border-color 0.2s; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); }
+        .card-title { color: var(--color-accent); font-size: 1.5em; margin-bottom: 15px; border-bottom: 1px solid #333; padding-bottom: 10px; }
+        h1 { color: var(--color-text); padding-top: 40px; }
+        
+    </style>
+</head>
+<body>
+    <div class="menu-toggle" id="menuToggle">
+        <span class="initial-blink">MENU</span> 
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu initial-blink">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+    </div>
+
+    <div class="menu-overlay" id="menuOverlay">
+        <div class="menu-close" onclick="toggleMenu()">
+            &times;
+        </div>
+        
+        <div class="menu-link-wrapper">
+            <a href="index.html" class="menu-button" onclick="toggleMenu()">Home</a>
+        </div>
+        <div class="menu-link-wrapper">
+            <a href="professional.html" class="menu-button" onclick="toggleMenu()">Experience</a>
+        </div>
+        <div class="menu-link-wrapper">
+            <a href="automation.html" class="menu-button active-page" onclick="toggleMenu()">
+                Automation Projects
+                <span class="tooltip">
+                    ❗
+                    <span class="tooltiptext">Secured to protect Intellectual Property. Access code required on the next page.</span>
+                </span>
+            </a>
+        </div>
+        <div class="menu-link-wrapper">
+            <a href="academic-foundations.html" class="menu-button" onclick="toggleMenu()">Academic Foundations</a>
+        </div>
+        <div class="menu-link-wrapper">
+            <a href="certificates.html" class="menu-button" onclick="toggleMenu()">Certifications</a>
+        </div>
+        <div class="menu-link-wrapper">
+            <a href="contact.html" class="menu-button" onclick="toggleMenu()">Contact</a>
+        </div>
+        
+        <div style="position: absolute; bottom: 20px; left: 40px; font-size: 0.9rem; color: #666;">
+            &copy; 2025 Christian J. Martinez Rosa
+        </div>
+    </div>
+
+    <main>
+        
+        <div class="page-title-section" style="text-align: center; padding: 40px 20px 0;">
+            <h1>Strategic Automation Case Studies (MBA-ITM Focus)</h1>
+            <p style="color: #aaa; max-width: 800px; margin: 10px auto 20px;">
+                These three systems showcase expertise in supply chain optimization, AI integration, and process redesign. Click a project to view the full, IP-protected analysis.
+            </p>
+        </div>
+
+        <div class="project-grid">
+            
+            <div class="project-card" onclick="window.location.href='depal-study.html'"> 
+                <h2 class="card-title">Pallet Depalletizing Automation</h2>
+                <div class="card-summary" style="color: #aaa; font-size: 0.95em;">
+                    <p><b>WHY:</b> Solve high cost and quality issues from reliance on 3PLs for manual pallet breakdown.</p>
+                    <p><b>HOW:</b> Proposal for a <b>Robotics and Computer Vision</b> system and prototype development.</p>
+                    <p><b>OUTPUT:</b> Projected <b>25% increase in throughput</b> and substantial labor cost reduction.</p>
+                </div>
+                <span class="view-study-link" style="color: var(--color-accent); font-weight: bold; display: block; margin-top: 15px;">View Full Case Study (Password Protected)</span>
+            </div>
+
+            <div class="project-card" onclick="window.location.href='bol-study.html'"> 
+                <h2 class="card-title">Bill of Lading (BOL) Automation</h2>
+                <div class="card-summary" style="color: #aaa; font-size: 0.95em;">
+                    <p><b>WHY:</b> Eliminate manual processing errors and delays in receiving for a large retail warehouse.</p>
+                    <p><b>HOW:</b> Implementation blueprint for <b>AI-driven OCR and NLP</b> with Exception Handling logic.</p>
+                    <p><b>OUTPUT:</b> Projected reduction of critical data entry errors by <b>over 95%</b>.</p>
+                </div>
+                <span class="view-study-link" style="color: var(--color-accent); font-weight: bold; display: block; margin-top: 15px;">View Full Case Study (Password Protected)</span>
+            </div>
+
+            <div class="project-card" onclick="window.location.href='dasher-study.html'"> 
+                <h2 class="card-title">DoorDash Communication System</h2>
+                <div class="card-summary" style="color: #aaa; font-size: 0.95em;">
+                    <p><b>WHY:</b> Improve efficiency and reduce driver wait times through real-time communication.</p>
+                    <p><b>HOW:</b> Design of a <b>Real-Time API</b> and automated messaging platform for 3PL support.</p>
+                    <p><b>OUTPUT:</b> Projected reduction in Dasher wait times by an estimated <b>40%</b>.</p>
+                </div>
+                <span class="view-study-link" style="color: var(--color-accent); font-weight: bold; display: block; margin-top: 15px;">View Full Case Study (Password Protected)</span>
+            </div>
+        </div>
+
+
+        <hr style="border-top: 1px solid #444; max-width: 1200px; margin: 40px auto;">
+
+        <div style="text-align: center; color: #7F8C8D; padding: 20px;">
+            <p><strong>Ethics & Intellectual Property Note:</strong> Access to full case studies requires a password to protect intellectual property and proprietary processes. All rights reserved.</p>
+        </div>
+    </main>
+    
+    <script>
+        // Toggles the hidden menu overlay
+        function toggleMenu() {
+            const overlay = document.getElementById('menuOverlay');
+            overlay.classList.toggle('active');
+            
+            // This is crucial: it prevents body scroll when the menu is open
+            document.body.style.overflow = overlay.classList.contains('active') ? 'hidden' : 'auto';
+        }
+
+        // Add event listener to the menu button
+        document.getElementById('menuToggle').addEventListener('click', toggleMenu);
+
+        // --- Timed Blink Effect Logic ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const blinkElements = document.querySelectorAll('.initial-blink');
+            
+            // Start the blink animation
+            blinkElements.forEach(el => {
+                el.style.animationPlayState = 'running';
+            });
+
+            // Stop the blink animation after 2 seconds (less intrusive)
+            setTimeout(() => {
+                blinkElements.forEach(el => {
+                    el.style.animation = 'none'; // Stop the animation
+                    el.style.color = 'var(--color-accent)'; // Ensure the final color is the accent color
+                });
+            }, 2000); // 2000 milliseconds = 2 seconds
+        });
+    </script>
+</body>
+</html>
