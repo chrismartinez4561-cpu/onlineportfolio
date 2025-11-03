@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Christian J. Martinez Rosa | Supply Chain Solutions Analyst Portfolio</title>
     
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;900&display=swap" rel="stylesheet">
     <style>
         /* CORE DARK MODE VARIABLES & STYLING */
         :root {
@@ -85,7 +86,7 @@
 
         .menu-overlay.active {
             transform: translateX(0); 
-            visibility: visible; 
+            visibility: visible;
         }
 
         /* BUTTON-STYLE MENU LINKS */
@@ -113,7 +114,7 @@
             
             /* FIX FOR WRAPPING */
             white-space: nowrap; 
-            overflow: visible; 
+            overflow: hidden; 
         }
 
         .menu-link-wrapper a.menu-button:hover {
@@ -132,8 +133,7 @@
             color: var(--color-accent);
         }
 
-          .tooltip .tooltiptext {
-
+        .tooltip .tooltiptext {
             visibility: hidden;
             width: 250px;
             background-color: var(--color-dark-bg);
@@ -141,22 +141,17 @@
             text-align: center;
             border-radius: 4px;
             padding: 8px;
+            position: absolute;
             z-index: 1001;
+            bottom: 100%; /* Position the tooltip above the exclamation point */
+            left: 50%;
+            margin-left: -125px; /* Center the tooltip */
             opacity: 0;
-            transition: opacity 0.3s, visibility 0.3s;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);
+            transition: opacity 0.3s;
             border: 1px solid var(--color-accent);
             font-size: 0.8rem;
             font-weight: 400;
             letter-spacing: normal;
-            position: absolute;
-            right: 0;
-            left: 100%
-            top: 50%
-            transfrom: translateY(-50%);
-            margin-left: 5px;     
-            margin-right: -150px
-
         }
         
         .tooltip:hover .tooltiptext {
@@ -190,6 +185,12 @@
             overflow: hidden;
             transition: filter 0.4s; 
             
+            /* **FINAL ROBOTIC ARM BACKGROUND IMAGE** */
+            background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url('background.png'); /* Subtle dark overlay + image */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed; /* Fixed background for dramatic effect */
         }
         .menu-overlay.active + .hero {
             filter: brightness(50%); 
@@ -258,37 +259,6 @@
                 background-attachment: scroll; /* Prevent fixed background on mobile for better performance */
             }
         }
-       /* ** NEW LANGUAGE BUTTON STYLES (CORRECTED) ** */
-        .lang-button {
-            display: inline-block; 
-            padding: 5px 10px;
-            margin: 0 5px 0 0; 
-            background-color: transparent; 
-            border: 1px solid var(--color-accent); 
-            color: var(--color-accent); 
-            text-decoration: none;
-            font-size: 0.9rem; 
-            border-radius: 4px;
-            text-align: center;
-            transition: all 0.2s;
-        }
-
-        .lang-button:hover {
-            background-color: var(--color-accent); 
-            color: var(--color-background); 
-            cursor: pointer;
-        }
-
-        /* FINAL CORRECTED PLACEMENT CSS - STATIC FLOW */
-        .lang-container {
-            position: static; 
-            margin-top: 30px; 
-            padding: 0 10px;
-            width: 100%;
-            text-align: right; 
-            padding-top: 15px;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-        }
     </style>
 </head>
 <body>
@@ -332,17 +302,11 @@
         <div class="menu-link-wrapper">
             <a href="certificates.html" class="menu-button" onclick="toggleMenu()">Certifications</a>
         </div>
-        <!-- ** TRANSLATION BUTTONS INSERTED HERE (Correct Placement) ** -->
-        <div class="lang-container">
-            <!-- The Google widget will load hidden here -->
-            <div id="google_translate_element" style="display: none;"></div> 
-            
-            <!-- Custom Buttons: Use the new .lang-button class -->
-            <a href="javascript:void(0)" class="lang-button" onclick="translatePage('en')">EN</a>
-            <a href="javascript:void(0)" class="lang-button" onclick="translatePage('es')">ES</a>
-            <a href="javascript:void(0)" class="lang-button" onclick="translatePage('fr')">FR</a>
+        <!-- NEW CONTACT LINK ADDED HERE -->
+        <div class="menu-link-wrapper">
+            <a href="contact.html" class="menu-button" onclick="toggleMenu()">Contact</a>
         </div>
-        <!-- END OF TRANSLATION BUTTONS -->
+        
         <div style="position: absolute; bottom: 20px; left: 40px; font-size: 0.9rem; color: #666;">
             &copy; 2025 Christian J. Martinez Rosa
         </div>
@@ -411,3 +375,5 @@
             }, 2000); // 2000 milliseconds = 2 seconds
         });
     </script>
+</body>
+</html>
