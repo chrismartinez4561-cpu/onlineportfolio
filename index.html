@@ -169,38 +169,44 @@
                 width: 80%; 
             }
 
-            /* 2. Scale Down Main Headers */
-            .hero-title, .page-header h1 { 
+            /* 2. Stabilize Hero Content & Height */
+            .hero {
+                /* ❗ FIX 1: Allow content height to dictate vertical space */
+                height: auto; 
+                padding-top: 100px; /* Add padding to push content down */
+                padding-bottom: 50px; /* Add padding below the facts */
+                
+                /* FIX 2: Prevents fixed background rendering bug on mobile */
+                background-attachment: scroll !important;
+            }
+            
+            /* 3. Scale Down Main Headers */
+            .hero-title { 
                 font-size: 2rem; 
                 letter-spacing: 3px; 
             }
-            .hero-subtitle, .page-header p { 
+            .hero-subtitle { 
                 font-size: 1.1rem; 
+                margin-bottom: 20px;
+            }
+            .purpose-statement {
+                 font-size: 0.95rem; 
+                 padding: 0 10px;
             }
             
-            /* 3. Stack Horizontal Grids/Blocks Vertically */
-            .quick-facts, 
-            .project-grid, 
-            .category-grid,
-            .cert-stack {
-                grid-template-columns: 1fr; /* Forces all horizontal layouts into one column */
-                gap: 20px; /* Consistent vertical spacing */
-                padding: 0 10px; /* Prevents edge-to-edge content */
+            /* 4. Stack Horizontal Grids/Blocks Vertically */
+            .quick-facts { 
+                flex-direction: column; 
+                padding: 0 20px; 
             }
-
-            /* 4. Ensure Buttons/Links fit better in the menu */
+            .fact-block { 
+                margin-bottom: 15px; 
+            }
+            
+            /* 5. Ensure Buttons/Links fit better in the menu */
             .menu-link-wrapper a.menu-button { 
                 font-size: 1.1rem; 
                 padding: 12px 15px; 
-            }
-            
-            /* 5. Address body padding/scrolling */
-            body {
-                padding-top: 60px; /* Reduce top padding on body */
-                background-attachment: scroll !important; /* Performance fix for mobile backgrounds */
-            }
-            .main-content {
-                min-height: auto; /* Allow content height to dictate screen height */
             }
         }
 
