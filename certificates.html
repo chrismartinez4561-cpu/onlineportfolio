@@ -183,7 +183,45 @@
         .menu-close { position: absolute; top: 20px; right: 20px; font-size: 2rem; cursor: pointer; color: var(--color-text); }
         .menu-close:hover { color: var(--color-accent); }
         .menu-link-wrapper { width: 90%; margin-bottom: 10px; }
+
+         /* TOOLTIP STYLING FOR IP WARNING */
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            margin-left: 10px;
+            cursor: default;
+            color: var(--color-accent);
+        }
+
+        .tooltip .tooltiptext {
+            transform: translateZ(0);
+            visibility: hidden;
+            box-sizing: border-box;
+            white-space: normal;
+            width: 250px;
+            background-color: var(--color-dark-bg);
+            color: var(--color-accent);
+            text-align: center;
+            border-radius: 4px;
+            padding: 8px;
+            position: absolute;
+            z-index: 1001;
+            bottom: 100%; /* Position the tooltip above the exclamation point */
+            left: 50%;
+            margin-left: -125px; /* Center the tooltip */
+            opacity: 0;
+            transition: opacity 0.3s;
+            border: 1px solid var(--color-accent);
+            font-size: 0.8rem;
+            font-weight: 400;
+            letter-spacing: normal;
+            border-radius: 4px;
+        }
         
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
         /* FIX FOR WRAPPING (APPLIED TO CERTIFICATES.HTML) */
         .menu-link-wrapper a.menu-button { 
             display: flex; 
