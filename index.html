@@ -135,7 +135,7 @@
 
           .tooltip .tooltiptext {
 
-            visibility: visible;
+            visibility: hidden;
             width: 250px;
             background-color: var(--color-dark-bg);
             color: var(--color-accent);
@@ -157,7 +157,13 @@
 
         }
 
-
+        .tooltip .tooltiptext {
+            position: absolute;
+            left: 100%;
+            top: 50%;
+            transform: translateY (-50%);
+            margin-left: 5px;
+        }
         
         .tooltip:hover .tooltiptext {
             visibility: visible;
