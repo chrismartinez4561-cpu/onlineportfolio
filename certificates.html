@@ -174,7 +174,7 @@
             color: var(--color-dark-bg);
         }
 
-        /* --- MENU & TOOLTIP STYLES (CORRECTED) --- */
+        /* --- MENU & TOOLTIP STYLES (FINAL CORRECTED BLOCK) --- */
         
         .menu-toggle { position: fixed; top: 20px; left: 20px; z-index: 1000; cursor: pointer; color: var(--color-text); font-size: 1.2rem; font-weight: 700; display: flex; align-items: center; transition: color 0.3s; }
         .menu-toggle:hover { color: var(--color-accent); }
@@ -238,7 +238,7 @@
             z-index: 1001;
             
             /* POSITIONING: Above the "!" and centered */
-            bottom: **110%**; /* Slightly higher for clean spacing */
+            bottom: **110%**; /* Final Corrected vertical positioning */
             left: 50%;
             margin-left: -125px; /* Centers the 250px box horizontally */
             
@@ -258,8 +258,6 @@
         /* Responsive Adjustments */
         @media (max-width: 768px) { .menu-overlay { width: 75%; } }
         
-        /* Removing old, redundant styles from the bottom of your original CSS */
-        .tooltip .tooltiptext { visibility: hidden; } 
     </style>
 </head>
 <body>
