@@ -36,17 +36,21 @@
         .menu-close { position: absolute; top: 20px; right: 20px; font-size: 2rem; cursor: pointer; color: var(--color-text); }
         .menu-close:hover { color: var(--color-accent); }
         .menu-link-wrapper { width: 90%; margin-bottom: 10px; }
+        
+        /* BUTTON FIXES (Includes overflow:visible) */
         .menu-link-wrapper a.menu-button { 
             display: flex; justify-content: space-between; align-items: center; width: 90%; padding: 10px 15px; 
             background-color: var(--color-button-bg); border: 1px solid var(--color-button-bg); 
             color: var(--color-text); text-decoration: none; font-size: 1.2rem; font-weight: 500; 
             letter-spacing: 0.5px; border-radius: 4px; transition: background-color 0.2s, border-color 0.2s, color 0.2s; 
-            white-space: nowrap; overflow: hidden; 
+            white-space: nowrap; 
+            overflow: **visible**; /* FIX: Prevents the tooltip from being clipped */
         }
-        .menu-link-wrapper a.menu-button:hover { background-color: var(--color-dark-bg); border-color: var(--color-accent); color: var(--color-accent); }
-        .tooltip .tooltiptext { visibility: hidden; } 
-        @media (max-width: 768px) { .menu-overlay { width: 75%; } }
-
+        .menu-link-wrapper a.menu-button:hover { 
+            background-color: var(--color-dark-bg); 
+            border-color: var(--color-accent); 
+            color: var(--color-accent); 
+        }
 
         /* 2. PAGE LAYOUT (Centered Minimal Card) */
         .main-content {
@@ -129,7 +133,8 @@
             fill: var(--color-dark-bg); 
             color: var(--color-dark-bg);
         }
-/* TOOLTIP STYLING FOR IP WARNING */
+
+        /* TOOLTIP STYLING FOR IP WARNING (CORRECTED) */
         .tooltip {
             position: relative;
             display: inline-block;
@@ -139,10 +144,13 @@
         }
 
         .tooltip .tooltiptext {
-            transform: translateZ(0);
+            /* FIX 1: Rendering Stability */
+            transform: **translateZ(0)**;
+            
             visibility: hidden;
-            box-sizing: border-box;
-            white-space: normal;
+            box-sizing: border-box; /* Ensures padding is inside the width */
+            white-space: normal;    /* Ensures text wraps */
+            
             width: 250px;
             background-color: var(--color-dark-bg);
             color: var(--color-accent);
@@ -151,33 +159,34 @@
             padding: 8px;
             position: absolute;
             z-index: 1001;
-            bottom: 100%; /* Position the tooltip above the exclamation point */
+            
+            /* POSITIONING: Above the "!" and centered */
+            bottom: **110%**; /* Slightly higher for clean spacing */
             left: 50%;
-            margin-left: -125px; /* Center the tooltip */
+            margin-left: -125px; /* Centers the 250px box horizontally */
+            
             opacity: 0;
             transition: opacity 0.3s;
             border: 1px solid var(--color-accent);
             font-size: 0.8rem;
             font-weight: 400;
             letter-spacing: normal;
-            border-radius: 4px;
         }
         
         .tooltip:hover .tooltiptext {
             visibility: visible;
             opacity: 1;
         }
+        /* End of Tooltip Correction */
     </style>
 </head>
 <body>
 
-    <!-- 1. MENU TOGGLE (Consistent) -->
     <div class="menu-toggle" id="menuToggle">
         <span>MENU</span> 
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
     </div>
 
-    <!-- 2. HIDDEN MENU OVERLAY (Consistent) -->
     <div class="menu-overlay" id="menuOverlay">
         <div class="menu-close" onclick="toggleMenu()">&times;</div>
         
@@ -189,27 +198,23 @@
         <div class="menu-link-wrapper"><a href="contact.html" class="menu-button" onclick="toggleMenu()">Contact</a></div>
     </div>
 
-    <!-- 3. MAIN CONTENT (Centered Card) -->
     <div class="main-content">
         <div class="contact-box">
             <h1>GET IN TOUCH</h1>
             <p>I am actively seeking roles where I can leverage data analysis and automation to optimize supply chain operations. I look forward to connecting!</p>
 
             <div class="contact-link-group">
-                <!-- EMAIL LINK -->
                 <a href="mailto:chris.martinez4561@gmail.com" target="_blank">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
                     chris.martinez4561@gmail.com
                 </a>
                 
-                <!-- PHONE LINK (CLICK-TO-CALL) -->
                 <a href="tel:+17209879153">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-8.63-8.63 2 2 0 0 1 2-2.18h3a2 2 0 0 0 2-2.18 2 2 0 0 0-1-1.73l-.75-.75a2 2 0 0 0-1-1.73l-.75-.75a2 2 0 0 0-1-1.73l-.75-.75a2 2 0 0 0-1-1.73l-.75-.75A19.79 19.79 0 0 1 3 4.92v3a2 2 0 0 0 2 2.18 19.79 19.79 0 0 1 8.63 3.07 19.5 19.5 0 0 1 8.63 8.63 2 2 0 0 0 2 2.18z"></path></svg>
                     (720) 987-9153
                 </a>
             </div>
             
-            <!-- LINKEDIN BUTTON -->
             <a href="https://www.linkedin.com/in/christian-martinez-rosa" target="_blank" class="linkedin-button">
                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="0" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 0-6 6v7h-4v-7a6 6 0 0 0 6-6h4zM4 11h4v10H4zM6 9a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/></svg>
                 Connect on LinkedIn
