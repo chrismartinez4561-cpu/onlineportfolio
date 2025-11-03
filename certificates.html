@@ -174,7 +174,8 @@
             color: var(--color-dark-bg);
         }
 
-        /* MENU TOGGLE STYLES (Cohesive with index.html) */
+        /* --- MENU & TOOLTIP STYLES (CORRECTED) --- */
+        
         .menu-toggle { position: fixed; top: 20px; left: 20px; z-index: 1000; cursor: pointer; color: var(--color-text); font-size: 1.2rem; font-weight: 700; display: flex; align-items: center; transition: color 0.3s; }
         .menu-toggle:hover { color: var(--color-accent); }
         .menu-toggle span { margin-right: 8px; }
@@ -184,45 +185,7 @@
         .menu-close:hover { color: var(--color-accent); }
         .menu-link-wrapper { width: 90%; margin-bottom: 10px; }
 
-         /* TOOLTIP STYLING FOR IP WARNING */
-        .tooltip {
-            position: relative;
-            display: inline-block;
-            margin-left: 10px;
-            cursor: default;
-            color: var(--color-accent);
-        }
-
-        .tooltip .tooltiptext {
-            transform: translateZ(0);
-            visibility: hidden;
-            box-sizing: border-box;
-            white-space: normal;
-            width: 250px;
-            background-color: var(--color-dark-bg);
-            color: var(--color-accent);
-            text-align: center;
-            border-radius: 4px;
-            padding: 8px;
-            position: absolute;
-            z-index: 1001;
-            bottom: 100%; /* Position the tooltip above the exclamation point */
-            left: 50%;
-            margin-left: -125px; /* Center the tooltip */
-            opacity: 0;
-            transition: opacity 0.3s;
-            border: 1px solid var(--color-accent);
-            font-size: 0.8rem;
-            font-weight: 400;
-            letter-spacing: normal;
-            border-radius: 4px;
-        }
-        
-        .tooltip:hover .tooltiptext {
-            visibility: visible;
-            opacity: 1;
-        }
-        /* FIX FOR WRAPPING (APPLIED TO CERTIFICATES.HTML) */
+        /* BUTTON FIXES */
         .menu-link-wrapper a.menu-button { 
             display: flex; 
             justify-content: space-between; 
@@ -238,15 +201,65 @@
             letter-spacing: 0.5px; 
             border-radius: 4px; 
             transition: background-color 0.2s, border-color 0.2s, color 0.2s; 
-            
             white-space: nowrap; 
-            overflow: visible; 
+            overflow: **visible**; /* FIX: Prevents the tooltip from being clipped */
         }
-        /* END OF CORRECTION */
         
-        .menu-link-wrapper a.menu-button:hover { background-color: var(--color-dark-bg); border-color: var(--color-accent); color: var(--color-accent); }
-        .tooltip .tooltiptext { visibility: hidden; } 
+        .menu-link-wrapper a.menu-button:hover { 
+            background-color: var(--color-dark-bg); 
+            border-color: var(--color-accent); 
+            color: var(--color-accent); 
+        }
+
+        /* TOOLTIP STYLING */
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            margin-left: 10px;
+            cursor: default;
+            color: var(--color-accent);
+        }
+
+        .tooltip .tooltiptext {
+            /* FIX 1: Rendering Stability */
+            transform: **translateZ(0)**;
+            
+            visibility: hidden;
+            box-sizing: border-box; /* Ensures padding is inside the width */
+            white-space: normal;    /* Ensures text wraps */
+            
+            width: 250px;
+            background-color: var(--color-dark-bg);
+            color: var(--color-accent);
+            text-align: center;
+            border-radius: 4px;
+            padding: 8px;
+            position: absolute;
+            z-index: 1001;
+            
+            /* POSITIONING: Above the "!" and centered */
+            bottom: **110%**; /* Slightly higher for clean spacing */
+            left: 50%;
+            margin-left: -125px; /* Centers the 250px box horizontally */
+            
+            opacity: 0;
+            transition: opacity 0.3s;
+            border: 1px solid var(--color-accent);
+            font-size: 0.8rem;
+            font-weight: 400;
+            letter-spacing: normal;
+        }
+        
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        /* Responsive Adjustments */
         @media (max-width: 768px) { .menu-overlay { width: 75%; } }
+        
+        /* Removing old, redundant styles from the bottom of your original CSS */
+        .tooltip .tooltiptext { visibility: hidden; } 
     </style>
 </head>
 <body>
@@ -264,7 +277,6 @@
         <div class="menu-link-wrapper"><a href="automation.html" class="menu-button" onclick="toggleMenu()">Automation Projects <span class="tooltip">❗<span class="tooltiptext">Secured to protect Intellectual Property.</span></span></a></div>
         <div class="menu-link-wrapper"><a href="academic-foundations.html" class="menu-button" onclick="toggleMenu()">Academic Foundations</a></div>
         <div class="menu-link-wrapper"><a href="certificates.html" class="menu-button" onclick="toggleMenu()">Certifications</a></div>
-        <!-- CONTACT LINK ADDED -->
         <div class="menu-link-wrapper"><a href="contact.html" class="menu-button" onclick="toggleMenu()">Contact</a></div> 
     </div>
     
@@ -277,7 +289,6 @@
         <div class="category-grid">
             
             <div class="category-tile">
-                <!-- FINAL ALIGNMENT: FORCED THREE LINES -->
                 <h2>Project Management <br>&<br> Strategic Execution</h2>
                 <p class="mb-4" style="color:#CCCCCC; font-size:0.95rem; text-align: center;">
                     This core competency section underscores proven capacity to lead complex initiatives and translate high-level corporate strategy into actionable, profitable automation projects. It validates expertise in strategic alignment, effective <strong>requirements management</strong>, and managing the end-to-end technical project lifecycle.
@@ -289,7 +300,6 @@
                         <p>
                             Demonstrates a focus on strategic planning and resource allocation. Proves the capability to align automation projects with high-level business goals, ensuring solutions support <strong>profitability and market position</strong>.
                         </p>
-                        <!-- DIRECT LINK -->
                         <a href="view-cert.html?file=Global-Strategy.pdf" target="_blank" class="cert-button">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
                             View Protected Certificate
@@ -301,7 +311,6 @@
                         <p>
                             Confirms proficiency in <strong>Requirements Management</strong> and the Project Lifecycle. Validates the ability to define the scope and technical needs of a new system (like the BOL Automation) and manage its successful implementation.
                         </p>
-                         <!-- DIRECT LINK -->
                          <a href="view-cert.html?file=Project-Management.pdf" target="_blank" class="cert-button">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
                             View Protected Certificate
@@ -311,7 +320,6 @@
             </div>
 
             <div class="category-tile">
-                <!-- FINAL ALIGNMENT: SINGLE LINE -->
                 <h2>Technical Domain & Data Analysis</h2>
                 <p class="mb-4" style="color:#CCCCCC; font-size:0.95rem; text-align: center;">
                     This section establishes a critical technical foundation, validating deep domain knowledge in supply chain operations paired with advanced data analysis skills. It demonstrates the proficiency required to harness the full <strong>data lifecycle (SQL, R, Tableau)</strong> to design, build, and implement data-driven automation rules.
@@ -323,7 +331,6 @@
                         <p>
                             Validates proficiency in the full data lifecycle, including data collection, cleaning, processing (SQL, R), analysis, and visualization (Tableau). This is the <strong>foundational technical skill</strong> required to design data-driven automation rules.
                         </p>
-                        <!-- DIRECT LINK -->
                         <a href="view-cert.html?file=Data-Analytics.pdf" target="_blank" class="cert-button">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
                             View Protected Certificate
@@ -335,7 +342,6 @@
                         <p>
                             Confirms deep operational domain knowledge in Supply Chain Management. Proves a comprehensive understanding of core processes, <strong>inventory control (FIFO)</strong>, and logistics, ensuring automated solutions are operationally feasible and correct.
                         </p>
-                         <!-- DIRECT LINK -->
                          <a href="view-cert.html?file=SCM-Operations.pdf" target="_blank" class="cert-button">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
                             View Protected Certificate
