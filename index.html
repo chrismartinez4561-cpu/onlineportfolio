@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Christian J. Martinez Rosa | Supply Chain Solutions Analyst Portfolio</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;900&display=swap" rel="stylesheet">
     <style>
         /* CORE DARK MODE VARIABLES & STYLING */
         :root {
@@ -189,12 +188,6 @@
             overflow: hidden;
             transition: filter 0.4s; 
             
-            /* **FINAL ROBOTIC ARM BACKGROUND IMAGE** */
-            background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url('robot_arm.jpg'); /* Subtle dark overlay + image */
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-attachment: fixed; /* Fixed background for dramatic effect */
         }
         .menu-overlay.active + .hero {
             filter: brightness(50%); 
@@ -295,8 +288,6 @@
             border-top: 1px solid rgba(255, 255, 255, 0.05);
         }
     </style>
-    <!-- ** GOOGLE TRANSLATE SCRIPT (MUST BE IN HEAD FOR TIMING) ** -->
-    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"> </script>
 </head>
 <body>
 
@@ -417,38 +408,5 @@
                 });
             }, 2000); // 2000 milliseconds = 2 seconds
         });
-    </script>
-    
-    <!-- ** TRANSLATION SCRIPTS (The FINAL, Working Fix) ** -->
-    <script type="text/javascript">
-        // Initializes the Google Translate service once
-        function googleTranslateElementInit() {
-            new google.translate.TranslateElement({
-                pageLanguage: 'en',
-                includedLanguages: 'en,es,fr', 
-                layout: google.translate.TranslateElement.InlineLayout.SIMPLE
-            }, 'google_translate_element');
-        }
-        
-        // Function to change the language when a button is clicked (The FINAL FIX)
-        function translatePage(lang) {
-            // This is the simplest and most reliable way to interact with Google's hidden selector.
-            // This relies on the core Google script loading properly.
-            var select = document.querySelector('.goog-te-combo');
-            if (select) {
-                select.value = lang;
-                select.dispatchEvent(new Event('change'));
-            } else {
-                // If the selector is not immediately available, try again after a small delay
-                // This compensates for the timing issue seen in some browsers
-                setTimeout(function() {
-                    var selectRetry = document.querySelector('.goog-te-combo');
-                    if (selectRetry) {
-                        selectRetry.value = lang;
-                        selectRetry.dispatchEvent(new Event('change'));
-                    }
-                }, 100); // 100ms delay for retry
-            }
-        }
     </script>
     <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
