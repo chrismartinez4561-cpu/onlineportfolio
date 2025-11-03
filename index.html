@@ -135,7 +135,7 @@
 
           .tooltip .tooltiptext {
 
-            visibility: top;
+            visibility: visible;
             width: 250px;
             background-color: var(--color-dark-bg);
             color: var(--color-accent);
@@ -148,7 +148,8 @@
             left: 50%;
             margin-left: -125px; /* Center the tooltip */
             opacity: 0;
-            transition: opacity 0.3s;
+            transition: opacity 0.3s, visibility 0.3s;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);
             border: 1px solid var(--color-accent);
             font-size: 0.8rem;
             font-weight: 400;
