@@ -154,6 +154,34 @@
             overflow: hidden; 
         }
         /* END OF CORRECTION */
+        .menu-link-wrapper a.menu-button {
+            /* The 'Little Square' Button Style */
+            display: flex; /* Use flex to align text and tooltip */
+            justify-content: space-between;
+            align-items: center;
+            width: 90%; /* Controls button width inside wrapper */
+            padding: 10px 15px;
+            background-color: var(--color-button-bg);
+            border: 1px solid var(--color-button-bg); /* Use same color border for subtle initial square */
+            color: var(--color-text);
+            text-decoration: none;
+            font-size: 1.2rem; /* Tighter font size */
+            font-weight: 500; /* Not bolded */
+            letter-spacing: 0.5px;
+            border-radius: 4px; /* Slight rounding for modernity */
+            transition: background-color 0.2s, border-color 0.2s, color 0.2s;
+            
+            /* FIX FOR WRAPPING */
+            white-space: nowrap; 
+            overflow: visible; 
+        }
+
+        .menu-link-wrapper a.menu-button:hover {
+            /* Interactive Effect: Gets lighter and shows accent border */
+            background-color: var(--color-dark-bg); /* Darker background on hover */
+            border-color: var(--color-accent); /* Accent border pops out */
+            color: var(--color-accent);
+        }
         /* TOOLTIP STYLING FOR IP WARNING */
         .tooltip {
             position: relative;
