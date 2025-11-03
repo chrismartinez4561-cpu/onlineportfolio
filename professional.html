@@ -147,7 +147,7 @@
             border-radius: 4px; 
             transition: background-color 0.2s, border-color 0.2s, color 0.2s; 
             white-space: nowrap; 
-            overflow: **visible**; /* FIX: Prevents the tooltip from being clipped */
+            overflow: visible; /* FIX: Prevents the tooltip from being clipped */
         }
         
         .menu-link-wrapper a.menu-button:hover { 
@@ -168,7 +168,7 @@
 
         .tooltip .tooltiptext {
             /* FIX 1: Rendering Stability */
-            transform: **translateZ(0)**;
+            transform: translateZ(0);
             
             visibility: hidden;
             box-sizing: border-box; /* Ensures padding is inside the width */
@@ -184,7 +184,7 @@
             z-index: 1001;
             
             /* POSITIONING: Above the "!" and centered */
-            bottom: **110%**; /* Slightly higher for clean spacing */
+            bottom: 110%; /* Slightly higher for clean spacing */
             left: 50%;
             margin-left: -125px; /* Centers the 250px box horizontally */
             
