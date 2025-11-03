@@ -130,7 +130,7 @@
         .menu-link-wrapper { width: 90%; margin-bottom: 10px; }
 
  
-        /* FIX FOR WRAPPING (APPLIED) */
+        /* BUTTON-STYLE MENU LINKS */
         .menu-link-wrapper a.menu-button { 
             display: flex; 
             justify-content: space-between; 
@@ -147,9 +147,17 @@
             border-radius: 4px; 
             transition: background-color 0.2s, border-color 0.2s, color 0.2s; 
             white-space: nowrap; 
-            overflow: hidden; 
+            overflow: **visible**; /* FIX: Prevents the tooltip from being clipped */
         }
-                /* TOOLTIP STYLING FOR IP WARNING */
+        
+        .menu-link-wrapper a.menu-button:hover { 
+            background-color: var(--color-dark-bg); 
+            border-color: var(--color-accent); 
+            color: var(--color-accent); 
+        }
+
+
+        /* TOOLTIP STYLING FOR IP WARNING */
         .tooltip {
             position: relative;
             display: inline-block;
@@ -159,10 +167,13 @@
         }
 
         .tooltip .tooltiptext {
-            transform: translateZ(0);
+            /* FIX 1: Rendering Stability */
+            transform: **translateZ(0)**;
+            
             visibility: hidden;
-            box-sizing: border-box;
-            white-space: normal;
+            box-sizing: border-box; /* Ensures padding is inside the width */
+            white-space: normal;    /* Ensures text wraps */
+            
             width: 250px;
             background-color: var(--color-dark-bg);
             color: var(--color-accent);
@@ -171,26 +182,29 @@
             padding: 8px;
             position: absolute;
             z-index: 1001;
-            bottom: 100%; /* Position the tooltip above the exclamation point */
+            
+            /* POSITIONING: Above the "!" and centered */
+            bottom: **110%**; /* Slightly higher for clean spacing */
             left: 50%;
-            margin-left: -125px; /* Center the tooltip */
+            margin-left: -125px; /* Centers the 250px box horizontally */
+            
             opacity: 0;
             transition: opacity 0.3s;
             border: 1px solid var(--color-accent);
             font-size: 0.8rem;
             font-weight: 400;
             letter-spacing: normal;
-            border-radius: 4px;
         }
         
         .tooltip:hover .tooltiptext {
             visibility: visible;
             opacity: 1;
         }
-        
-        .menu-link-wrapper a.menu-button:hover { background-color: var(--color-dark-bg); border-color: var(--color-accent); color: var(--color-accent); }
-        .tooltip .tooltiptext { visibility: hidden; } 
+
+        /* Responsive Adjustments */
         @media (max-width: 768px) { .menu-overlay { width: 75%; } }
+
+        /* Removing redundant styles from the bottom of your original CSS */
     </style>
 </head>
 <body>
@@ -219,7 +233,6 @@
 
         <div class="project-grid">
             
-            <!-- PROJECT 1: Distribution Manager - Retail Audit -->
             <div class="project-card" onclick="window.location.href='#'"> 
                 <h2>Retail Audit & Inventory Integrity System</h2>
                 <div class="card-summary" style="color: #aaa; font-size: 0.95em;">
@@ -230,7 +243,6 @@
                 <span class="view-study-link">Process Overview</span>
             </div>
 
-            <!-- PROJECT 2: Distribution Manager - Order Fulfillment -->
             <div class="project-card" onclick="window.location.href='#'"> 
                 <h2>Order Fulfillment Workflow Streamlining</h2>
                 <div class="card-summary" style="color: #aaa; font-size: 0.95em;">
@@ -241,8 +253,7 @@
                 <span class="view-study-link">Process Overview</span>
             </div>
 
-            <!-- PROJECT 3: Fulfillment Manager - Efficiency Improvement -->
-             <div class="project-card" onclick="window.location.href='#'"> 
+            <div class="project-card" onclick="window.location.href='#'"> 
                 <h2>Departmental Efficiency & Logistics Optimization</h2>
                 <div class="card-summary" style="color: #aaa; font-size: 0.95em;">
                     <p><b>WHY:</b> Manual logistics processes and disjointed order fulfillment steps created throughput bottlenecks and resource waste.</p>
@@ -262,7 +273,6 @@
         
     </div>
 
-    <!-- JAVASCRIPT FOR MENU FUNCTIONALITY -->
     <script>
         function toggleMenu() {
             const overlay = document.getElementById('menuOverlay');
