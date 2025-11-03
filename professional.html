@@ -129,7 +129,27 @@
         .menu-close:hover { color: var(--color-accent); }
         .menu-link-wrapper { width: 90%; margin-bottom: 10px; }
 
-         /* TOOLTIP STYLING FOR IP WARNING */
+ 
+        /* FIX FOR WRAPPING (APPLIED) */
+        .menu-link-wrapper a.menu-button { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            width: 90%; 
+            padding: 10px 15px; 
+            background-color: var(--color-button-bg); 
+            border: 1px solid var(--color-button-bg); 
+            color: var(--color-text); 
+            text-decoration: none; 
+            font-size: 1.2rem; 
+            font-weight: 500; 
+            letter-spacing: 0.5px; 
+            border-radius: 4px; 
+            transition: background-color 0.2s, border-color 0.2s, color 0.2s; 
+            white-space: nowrap; 
+            overflow: hidden; 
+        }
+                /* TOOLTIP STYLING FOR IP WARNING */
         .tooltip {
             position: relative;
             display: inline-block;
@@ -167,25 +187,6 @@
             visibility: visible;
             opacity: 1;
         }
-        /* FIX FOR WRAPPING (APPLIED) */
-        .menu-link-wrapper a.menu-button { 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            width: 90%; 
-            padding: 10px 15px; 
-            background-color: var(--color-button-bg); 
-            border: 1px solid var(--color-button-bg); 
-            color: var(--color-text); 
-            text-decoration: none; 
-            font-size: 1.2rem; 
-            font-weight: 500; 
-            letter-spacing: 0.5px; 
-            border-radius: 4px; 
-            transition: background-color 0.2s, border-color 0.2s, color 0.2s; 
-            white-space: nowrap; 
-            overflow: hidden; 
-        }
         
         .menu-link-wrapper a.menu-button:hover { background-color: var(--color-dark-bg); border-color: var(--color-accent); color: var(--color-accent); }
         .tooltip .tooltiptext { visibility: hidden; } 
@@ -209,7 +210,7 @@
         <div class="menu-link-wrapper"><a href="certificates.html" class="menu-button" onclick="toggleMenu()">Certifications</a></div>
         <div class="menu-link-wrapper"><a href="contact.html" class="menu-button" onclick="toggleMenu()">Contact</a></div> 
     </div>
-    
+
     <div class="container">
         <header class="page-header">
             <h1>Professional Experience & Impact</h1>
