@@ -155,7 +155,50 @@
             visibility: visible;
             opacity: 1;
         }
-    
+     /* --- UNIVERSAL MOBILE RESPONSIVENESS (max-width: 768px) --- */
+        @media (max-width: 768px) {
+            /* 1. Adjust Menu Width */
+            .menu-overlay { 
+                width: 80%; 
+            }
+
+            /* 2. Scale Down Main Headers */
+            .hero-title, .page-header h1 { 
+                font-size: 2rem; 
+                letter-spacing: 3px; 
+            }
+            .hero-subtitle, .page-header p { 
+                font-size: 1.1rem; 
+            }
+            
+            /* 3. Stack Horizontal Grids/Blocks Vertically */
+            .quick-facts, 
+            .project-grid, 
+            .category-grid,
+            .cert-stack {
+                grid-template-columns: 1fr; /* Forces all horizontal layouts into one column */
+                gap: 20px; /* Consistent vertical spacing */
+                padding: 0 10px; /* Prevents edge-to-edge content */
+            }
+
+            /* 4. Ensure Buttons/Links fit better in the menu */
+            .menu-link-wrapper a.menu-button { 
+                font-size: 1.1rem; 
+                padding: 12px 15px; 
+            }
+            
+            /* 5. Address body padding/scrolling */
+            body {
+                padding-top: 60px; /* Reduce top padding on body */
+                background-attachment: scroll !important; /* Performance fix for mobile backgrounds */
+            }
+            .main-content {
+                min-height: auto; /* Allow content height to dictate screen height */
+            }
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) { .menu-overlay { width: 75%; } }
         /* Menu Close Button - fixed within the slide-out panel */
         .menu-close {
             position: absolute;
