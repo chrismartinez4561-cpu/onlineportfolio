@@ -201,47 +201,7 @@
         @media (max-width: 768px) { .menu-overlay { width: 75%;                         
             } 
         }
-            /* 2. Stabilize Hero Content & Height */
-            .hero {
-                /* ❗ FIX 1: Allow content height to dictate vertical space */
-                height: auto; 
-                padding-top: 100px; /* Add padding to push content down */
-                padding-bottom: 50px; /* Add padding below the facts */
-                
-                /* FIX 2: Prevents fixed background rendering bug on mobile */
-                background-attachment: scroll !important;
-            }
-            
-            /* 3. Scale Down Main Headers */
-            .hero-title { 
-                font-size: 2rem; 
-                letter-spacing: 3px; 
-            }
-            .hero-subtitle { 
-                font-size: 1.1rem; 
-                margin-bottom: 20px;
-            }
-            .purpose-statement {
-                 font-size: 0.95rem; 
-                 padding: 0 10px;
-            }
-            
-            /* 4. Stack Horizontal Grids/Blocks Vertically */
-            .quick-facts { 
-                flex-direction: column; 
-                padding: 0 20px; 
-            }
-            .fact-block { 
-                margin-bottom: 15px; 
-            }
-            
-            /* 5. Ensure Buttons/Links fit better in the menu */
-            .menu-link-wrapper a.menu-button { 
-                font-size: 1.1rem; 
-                padding: 12px 15px; 
-            }
-        }
-
+    
         /* Menu Close Button - fixed within the slide-out panel */
         .menu-close {
             position: absolute;
