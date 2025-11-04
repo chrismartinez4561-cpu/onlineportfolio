@@ -198,6 +198,10 @@
                 padding-top: 60px; /* Reduce top padding on body */
                 background-attachment: scroll !important; /* Performance fix for mobile backgrounds */
             }
+            html, body { /* ❗ CRITICAL FIX: Overrides any fixed height and forces vertical scroll */
+                        height: auto **!important**; 
+                        overflow-y: scroll !important;
+        }
             .main-content {
                 min-height: auto; /* Allow content height to dictate screen height */
             }
