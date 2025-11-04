@@ -160,47 +160,6 @@
             visibility: visible;
             opacity: 1;
         }
-       /* --- UNIVERSAL MOBILE RESPONSIVENESS (max-width: 768px) --- */
-        @media (max-width: 768px) {
-            /* 1. Adjust Menu Width */
-            .menu-overlay { 
-                width: 80%; 
-            }
-
-            /* 2. Scale Down Main Headers */
-            .hero-title, .page-header h1 { 
-                font-size: 2rem; 
-                letter-spacing: 3px; 
-            }
-            .hero-subtitle, .page-header p { 
-                font-size: 1.1rem; 
-            }
-            
-            /* 3. Stack Horizontal Grids/Blocks Vertically */
-            .quick-facts, 
-            .project-grid, 
-            .category-grid,
-            .cert-stack {
-                grid-template-columns: 1fr; /* Forces all horizontal layouts into one column */
-                gap: 20px; /* Consistent vertical spacing */
-                padding: 0 10px; /* Prevents edge-to-edge content */
-            }
-
-            /* 4. Ensure Buttons/Links fit better in the menu */
-            .menu-link-wrapper a.menu-button { 
-                font-size: 1.1rem; 
-                padding: 12px 15px; 
-            }
-            
-            /* 5. Address body padding/scrolling */
-            body {
-                padding-top: 60px; /* Reduce top padding on body */
-                background-attachment: scroll !important; /* Performance fix for mobile backgrounds */
-            }
-            .main-content {
-                min-height: auto; /* Allow content height to dictate screen height */
-            }
-        }
             /* 2. Stabilize Hero Content & Height */
             .hero {
                 /* ❗ FIX 1: Allow content height to dictate vertical space */
@@ -268,12 +227,6 @@
             overflow: hidden;
             transition: filter 0.4s; 
             
-            /* **FINAL ROBOTIC ARM BACKGROUND IMAGE** */
-            background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url('background.png'); /* Subtle dark overlay + image */
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-attachment: fixed; /* Fixed background for dramatic effect */
         }
         .menu-overlay.active + .hero {
             filter: brightness(50%); 
