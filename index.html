@@ -81,7 +81,12 @@
             transform: translateX(0); 
             visibility: visible;
         }
-
+    /* Full width on mobile */
+        @media (max-width: 768px) {
+            .menu-overlay {
+                width: 75%;
+            }
+        }
         /* BUTTON-STYLE MENU LINKS */
         .menu-link-wrapper {
             width: 90%;
